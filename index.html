@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Education for All</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url("https://images.unsplash.com/photo-1523240795612-9a054b0db644") no-repeat center/cover;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    header p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    header .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #27ae60;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    header .btn:hover {
+      background: #1e8449;
+    }
+
+    nav {
+      background: #2c3e50;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+      font-size: 1.6rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      margin: 10px 0;
+    }
+    ul li a {
+      text-decoration: none;
+      color: #2980b9;
+      font-weight: bold;
+    }
+
+    form input, form textarea, form button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    form button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    form button:hover {
+      background: #1e8449;
+    }
+
+    footer {
+      background: #34495e;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 60px 15px;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      nav a {
+        display: inline-block;
+        margin: 8px;
+        font-size: 0.9rem;
+      }
+      .card {
+        padding: 15px;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 50px 12px;
+      }
+      header h1 {
+        font-size: 1.8rem;
+      }
+      header p {
+        font-size: 0.95rem;
+      }
+      nav {
+        padding: 10px;
+      }
+      nav a {
+        display: block;
+        margin: 6px 0;
+        font-size: 1rem;
+      }
+      .btn {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <header>
+    <h1>Urban Education for All</h1>
+    <p>Providing quality education to underprivileged children in urban areas — bridging the gap with free resources, volunteers, and community support.</p>
+    <a href="#volunteer" class="btn">Become a Volunteer</a>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#resources">Resources</a>
+    <a href="#volunteer">Volunteer</a>
+    <a href="#impact">Impact</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="card">
+      <h2>About the Initiative</h2>
+      <p>Millions of children in urban India lack access to quality education. Our platform connects them with volunteers, NGOs, and free resources in their own language. We aim to empower children through interactive lessons, skill-building, and mentorship.</p>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section id="resources">
+    <div class="card">
+      <h2>Free Learning Resources</h2>
+      <ul>
+        <li><a href="#">📘 Math Basics for Kids (PDF)</a></li>
+        <li><a href="#">🔬 Fun Science Experiments</a></li>
+        <li><a href="#">📖 English Learning Videos</a></li>
+        <li><a href="#">🌍 Career Stories from Real People</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Volunteer Section -->
+  <section id="volunteer">
+    <div class="card">
+      <h2>Become a Volunteer</h2>
+      <p>Join us as a mentor, tutor, or resource creator. Your time can change a child’s future.</p>
+      <form>
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="skills" rows="4" placeholder="How can you contribute?" required></textarea>
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Impact Section -->
+  <section id="impact">
+    <div class="card">
+      <h2>Our Impact</h2>
+      <p>✔ 500+ children enrolled in free online classes</p>
+      <p>✔ 120+ volunteers teaching across 5 cities</p>
+      <p>✔ Partnerships with 10 NGOs to reach more families</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="card">
+      <h2>Contact Us</h2>
+      <p>Email: urbanedu@support.org</p>
+      <p>Phone: +91 98765 43210</p>
+      <p>Address: Education Hub, Bengaluru</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Urban Education for All | Together, we can make a difference</p>
+  </footer>
+</body>
+</html>
