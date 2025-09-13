@@ -3,248 +3,495 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Urban Education for All</title>
+  <title>PEST - Poor Education System Technology</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
-      background: #f8f9fa;
+      background: linear-gradient(135deg, #f0f8ff, #dff6ff);
       color: #333;
     }
-
     header {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-        url("https://images.unsplash.com/photo-1523240795612-9a054b0db644") no-repeat center/cover;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
       color: white;
+      padding: 25px;
       text-align: center;
-      padding: 80px 20px;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-    }
-    header p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: auto;
-    }
-    header .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 25px;
-      background: #27ae60;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    header .btn:hover {
-      background: #1e8449;
-    }
-
-    nav {
-      background: #2c3e50;
-      padding: 12px;
-      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.25);
       position: sticky;
       top: 0;
-      z-index: 1000;
+      z-index: 100;
+    }
+    nav {
+      background: #222;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 12px 0;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
     }
     nav a {
-      color: white;
-      margin: 0 12px;
+      color: #fff;
       text-decoration: none;
+      margin: 10px 20px;
       font-weight: 500;
-      font-size: 0.95rem;
+      padding: 8px 15px;
+      border-radius: 8px;
+      transition: 0.3s;
     }
     nav a:hover {
-      text-decoration: underline;
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      color: #fff;
+      transform: scale(1.1);
     }
-
-    section {
-      padding: 40px 20px;
+    .container {
       max-width: 1000px;
-      margin: auto;
-    }
-    .card {
+      margin: 30px auto;
+      padding: 30px;
       background: white;
-      padding: 20px;
-      margin: 20px 0;
-      border-radius: 10px;
-      box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      animation: fadeIn 0.6s ease-in-out;
+      transition: transform 0.3s;
     }
+    .container:hover { transform: translateY(-5px); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     h2 {
-      color: #2c3e50;
-      margin-bottom: 15px;
-      font-size: 1.6rem;
+      color: #ff416c;
+      margin-bottom: 20px;
+      border-left: 6px solid #ff4b2b;
+      padding-left: 15px;
+      font-size: 1.8rem;
     }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    ul li {
-      margin: 10px 0;
-    }
-    ul li a {
-      text-decoration: none;
-      color: #2980b9;
-      font-weight: bold;
-    }
-
-    form input, form textarea, form button {
-      width: 100%;
-      margin: 10px 0;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    input[type="text"], input[type="password"], input[type="number"] {
+      width: 80%;
+      padding: 14px;
+      margin: 12px 0;
+      border: 2px solid #ff4b2b;
+      border-radius: 10px;
       font-size: 1rem;
+      transition: 0.3s;
     }
-    form button {
-      background: #27ae60;
+    input:focus {
+      border-color: #ff416c;
+      outline: none;
+      box-shadow: 0 0 10px rgba(255,65,108,0.4);
+    }
+    button {
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
       color: white;
       border: none;
+      border-radius: 12px;
       cursor: pointer;
-      font-weight: bold;
+      margin-top: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.4s;
     }
-    form button:hover {
-      background: #1e8449;
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255,65,108,0.4);
     }
-
-    footer {
-      background: #34495e;
-      color: white;
+    .dashboard { display: none; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 14px;
       text-align: center;
+      font-size: 0.95rem;
+    }
+    th {
+      background: #ff416c;
+      color: white;
+      font-weight: 600;
+    }
+    tr:nth-child(even) { background: #ffe6e1; }
+    canvas {
+      margin-top: 25px;
+      background: #fff;
+      border-radius: 15px;
       padding: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
       margin-top: 40px;
-      font-size: 0.9rem;
+      background: #222;
+      color: #eee;
+      font-size: 0.95rem;
     }
+    ul li { margin: 12px 0; font-size: 1rem; }
+    ul li a { color: #ff416c; font-weight: 500; text-decoration: none; transition: 0.3s; }
+    ul li a:hover { color: #ff4b2b; text-decoration: underline; }
+    .solutions { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 20px; }
+    .solution-card {
+      flex: 1 1 45%;
+      background: linear-gradient(135deg, #ffe6e1, #ffdede);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .solution-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 25px rgba(255,65,108,0.2);
+    }
+    .solution-card i { font-size: 2rem; color: #ff416c; }
+    .solution-card p { margin: 0; font-weight: 500; color: #333; }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      header {
-        padding: 60px 15px;
-      }
-      header h1 {
-        font-size: 2rem;
-      }
-      header p {
-        font-size: 1rem;
-      }
-      nav a {
-        display: inline-block;
-        margin: 8px;
-        font-size: 0.9rem;
-      }
-      .card {
-        padding: 15px;
-      }
-      h2 {
-        font-size: 1.4rem;
-      }
+    /* Dashboard Cards */
+    .card {
+      background: linear-gradient(135deg, #ffe6e1, #ffdede);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+      transition: 0.3s;
     }
+    .card:hover { transform: translateY(-5px); }
+    .card h3 { color: #ff416c; margin-bottom: 10px; }
 
-    @media (max-width: 480px) {
-      header {
-        padding: 50px 12px;
-      }
-      header h1 {
-        font-size: 1.8rem;
-      }
-      header p {
-        font-size: 0.95rem;
-      }
-      nav {
-        padding: 10px;
-      }
-      nav a {
-        display: block;
-        margin: 6px 0;
-        font-size: 1rem;
-      }
-      .btn {
-        padding: 10px 18px;
-        font-size: 0.9rem;
-      }
-    }
+    /* Home Section Enhancements */
+    .home-flex { display: flex; flex-wrap: wrap; gap: 25px; align-items: center; }
+    .home-flex img { flex: 1; max-width: 400px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .home-flex .home-text { flex: 2; min-width: 250px; }
+    .donation, .complaint { margin-top: 25px; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+    .donation { background: #ffe6e1; }
+    .complaint { background: #ffdede; }
+    .donation h3, .complaint h3 { color: #ff416c; }
+    .donation ul, .complaint ul { margin: 0; padding-left: 20px; }
   </style>
 </head>
 <body>
-  <!-- Hero Section -->
-  <header>
-    <h1>Urban Education for All</h1>
-    <p>Providing quality education to underprivileged children in urban areas — bridging the gap with free resources, volunteers, and community support.</p>
-    <a href="#volunteer" class="btn">Become a Volunteer</a>
-  </header>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#about">About</a>
-    <a href="#resources">Resources</a>
-    <a href="#volunteer">Volunteer</a>
-    <a href="#impact">Impact</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<header>PEST - Poor Education System Technology</header>
 
-  <!-- About Section -->
-  <section id="about">
-    <div class="card">
-      <h2>About the Initiative</h2>
-      <p>Millions of children in urban India lack access to quality education. Our platform connects them with volunteers, NGOs, and free resources in their own language. We aim to empower children through interactive lessons, skill-building, and mentorship.</p>
+<nav>
+  <a href="#" onclick="showSection('home')">Home</a>
+  <a href="#" onclick="showSection('studentLogin')">Student Login</a>
+  <a href="#" onclick="showSection('teacherLogin')">Teacher Login</a>
+  <a href="#" onclick="showSection('about')">About Us</a>
+  <a href="#" onclick="showSection('resources')">Learning Resources</a>
+  <a href="#" onclick="showSection('challenges')">Challenges & Solutions</a>
+  <a href="#" onclick="showSection('queries')">Queries</a>
+</nav>
+
+<!-- Home Section -->
+<div class="container" id="home">
+  <h2>Welcome to PEST</h2>
+
+  <div class="home-flex">
+    <img src="https://images.unsplash.com/photo-1596496050470-8e60a25d1b16?auto=format&fit=crop&w=400&q=80" alt="Children Learning">
+    <div class="home-text">
+      <p>Our mission is to bring quality education to students in urban and underprivileged areas of India through technology. We provide tools for performance tracking, exam preparation, and accessible resources for every learner.</p>
+      <p>We also monitor and report cases where children might be forced into labor or miss school due to unsafe conditions. If you notice any illegal activity affecting students, you can report it confidentially below.</p>
     </div>
-  </section>
+  </div>
 
-  <!-- Resources Section -->
-  <section id="resources">
-    <div class="card">
-      <h2>Free Learning Resources</h2>
-      <ul>
-        <li><a href="#">📘 Math Basics for Kids (PDF)</a></li>
-        <li><a href="#">🔬 Fun Science Experiments</a></li>
-        <li><a href="#">📖 English Learning Videos</a></li>
-        <li><a href="#">🌍 Career Stories from Real People</a></li>
-      </ul>
-    </div>
-  </section>
+  <!-- Donation Section -->
+  <div class="donation">
+    <h3>Support Our Mission</h3>
+    <p>Your donations help us provide:</p>
+    <ul>
+      <li>Learning materials for rural children</li>
+      <li>Local learning centers and mobile classrooms</li>
+      <li>Scholarships & rewards to motivate students</li>
+      <li>Teacher training & virtual mentoring programs</li>
+    </ul>
+    <button onclick="window.location.href='https://www.paymentsite.com/donate'">Donate Now</button>
+  </div>
 
-  <!-- Volunteer Section -->
-  <section id="volunteer">
-    <div class="card">
-      <h2>Become a Volunteer</h2>
-      <p>Join us as a mentor, tutor, or resource creator. Your time can change a child’s future.</p>
-      <form>
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="skills" rows="4" placeholder="How can you contribute?" required></textarea>
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
-  </section>
+  <!-- Complaint Section -->
+  <div class="complaint">
+    <h3>Report a Concern</h3>
+    <p>If you notice unsafe or illegal activities affecting children (child labor, harassment, unsafe conditions), report it confidentially:</p>
+    <input type="text" id="complaintText" placeholder="Write your complaint here">
+    <button onclick="submitComplaint()">Submit Complaint</button>
+    <p id="complaintResponse" style="margin-top:10px; color:green;"></p>
+  </div>
 
-  <!-- Impact Section -->
-  <section id="impact">
-    <div class="card">
-      <h2>Our Impact</h2>
-      <p>✔ 500+ children enrolled in free online classes</p>
-      <p>✔ 120+ volunteers teaching across 5 cities</p>
-      <p>✔ Partnerships with 10 NGOs to reach more families</p>
-    </div>
-  </section>
+  <div style="margin-top:25px; text-align:center;">
+    <img src="https://images.unsplash.com/photo-1601933471632-fd21e3d5c63f?auto=format&fit=crop&w=800&q=80" 
+         alt="Students in Classroom" style="width:90%; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+  </div>
+</div>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <div class="card">
-      <h2>Contact Us</h2>
-      <p>Email: urbanedu@support.org</p>
-      <p>Phone: +91 98765 43210</p>
-      <p>Address: Education Hub, Bengaluru</p>
-    </div>
-  </section>
+<!-- Student Login -->
+<div class="container" id="studentLogin" style="display:none;">
+  <h2>Student Login</h2>
+  <div class="login-box">
+    <input type="text" id="studentId" placeholder="Student ID"><br>
+    <input type="password" id="studentPass" placeholder="Password"><br>
+    <button onclick="studentLogin()">Login</button>
+    <p style="margin-top:10px;"><a href="#" onclick="alert('Forgot Password? Contact Institute')">Forgot Password?</a></p>
+  </div>
+</div>
 
-  <footer>
-    <p>&copy; 2025 Urban Education for All | Together, we can make a difference</p>
-  </footer>
+<!-- Teacher Login -->
+<div class="container" id="teacherLogin" style="display:none;">
+  <h2>Teacher Login</h2>
+  <div class="login-box">
+    <input type="text" id="teacherId" placeholder="Teacher ID"><br>
+    <input type="password" id="teacherPass" placeholder="Password"><br>
+    <button onclick="teacherLogin()">Login</button>
+  </div>
+</div>
+
+<!-- Student Dashboard -->
+<div class="container dashboard" id="studentDashboard">
+  <h2>Student Dashboard</h2>
+  <div class="card"><strong>Name:</strong> Anirudh Gowda</div>
+  <div class="card"><strong>ID:</strong> 1234</div>
+
+  <div class="card">
+    <h3>Exam Performance</h3>
+    <table id="studentMarksTable">
+      <tr><th>Exam</th><th>Marks</th></tr>
+      <tr><td>Mid Term 1</td><td>68</td></tr>
+      <tr><td>Mid Term 2</td><td>75</td></tr>
+      <tr><td>Final Exam</td><td>82</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Performance Graph</h3>
+    <canvas id="performanceChart"></canvas>
+  </div>
+</div>
+
+<!-- Teacher Dashboard -->
+<div class="container dashboard" id="teacherDashboard">
+  <h2>Teacher Dashboard</h2>
+  <div class="card"><strong>Welcome,</strong> Ramesh Kumar</div>
+
+  <div class="card">
+    <h3>Submit Marks</h3>
+    <input type="text" id="inputStudentId" placeholder="Enter Student ID">
+    <input type="number" id="inputMarks" placeholder="Enter Marks">
+    <button onclick="submitMarks()">Submit</button>
+  </div>
+
+  <div class="card">
+    <h3>Marks Submitted</h3>
+    <table id="teacherMarksTable">
+      <tr><th>Student ID</th><th>Marks</th></tr>
+    </table>
+  </div>
+</div>
+
+<!-- About -->
+<div class="container" id="about" style="display:none;">
+  <h2>About Us</h2>
+  <p>PEST is a startup aimed at bridging the education gap for students in urban India using affordable technology. We focus on accessibility, performance tracking, and connecting teachers with students.</p>
+  <h3>Team Members</h3>
+  <ul>
+    <li>Manoj H Gowda</li>
+    <li>Anirudh Gowda</li>
+    <li>Apurva S H</li>
+    <li>Suchitra K</li>
+    <li>Likhithashree D</li>
+    <li>Neha P V</li>
+    <li>Varshitha H</li>
+    <li>Kavya B N</li>
+    <li>Rishika</li>
+    <li>Keerthi</li>
+  </ul>
+  <p><strong>Affiliation:</strong> Malnad College of Engineering, Hassan</p>
+</div>
+
+<!-- Learning Resources -->
+<div class="container" id="resources" style="display:none;">
+  <h2>Learning Resources</h2>
+  <ul>
+    <li><a href="https://ncert.nic.in/textbook.php" target="_blank">NCERT Textbooks</a></li>
+    <li><a href="https://www.khanacademy.org/" target="_blank">Khan Academy</a></li>
+    <li><a href="https://www.olympiadsuccess.com/" target="_blank">Olympiad Success</a></li>
+    <li><a href="https://byjus.com/" target="_blank">BYJU'S Learning</a></li>
+    <li><a href="https://www.toppr.com/" target="_blank">Toppr</a></li>
+  </ul>
+</div>
+
+<!-- Challenges & Solutions -->
+<div class="container" id="challenges" style="display:none;">
+  <h2>Challenges & Solutions in Rural Education</h2>
+  <p>Children in rural India face many obstacles that prevent them from attending school regularly:</p>
+  <ul>
+    <li><strong>Poverty:</strong> Families depend on children for work at home or fields.</li>
+    <li><strong>Lack of Infrastructure:</strong> Schools may be far away or lack facilities.</li>
+    <li><strong>Teacher Shortage:</strong> Few qualified teachers available.</li>
+    <li><strong>Awareness:</strong> Parents may not value education.</li>
+    <li><strong>Transportation:</strong> Limited safe transport.</li>
+  </ul>
+
+  <div class="solutions">
+    <div class="solution-card"><i class="fas fa-laptop-code"></i><p>Provide online & offline learning materials for children who cannot travel daily.</p></div>
+    <div class="solution-card"><i class="fas fa-school"></i><p>Set up local learning centers or mobile classrooms near villages.</p></div>
+    <div class="solution-card"><i class="fas fa-chalkboard-teacher"></i><p>Offer teacher training and virtual mentoring to improve education quality.</p></div>
+    <div class="solution-card"><i class="fas fa-users"></i><p>Community awareness campaigns highlighting the importance of education.</p></div>
+    <div class="solution-card"><i class="fas fa-award"></i><p>Implement performance tracking & rewards to motivate students and parents.</p></div>
+    <div class="solution-card"><i class="fas fa-handshake"></i><p>Facilitate partnerships with government and NGOs for infrastructure support.</p></div>
+  </div>
+
+  <!-- Working Prototype -->
+  <div style="margin-top:30px;">
+    <h3>Interactive Prototype</h3>
+    <p>Select your village to view local resources:</p>
+    <select id="villageSelect">
+      <option value="">-- Select Your Village --</option>
+      <option value="Hassan">Hassan</option>
+      <option value="Channarayapatna">Channarayapatna</option>
+      <option value="Belur">Belur</option>
+      <option value="Arsikere">Arsikere</option>
+    </select>
+    <button onclick="showResources()">Show Resources</button>
+    <div id="villageResources" style="margin-top:15px;"></div>
+
+    <h4>Virtual Mentoring</h4>
+    <p>Submit your query and a mentor will respond:</p>
+    <input type="text" id="studentQuery" placeholder="Write your query here">
+    <button onclick="submitQuery()">Submit</button>
+    <p id="queryResponse" style="margin-top:10px; color:green;"></p>
+  </div>
+</div>
+
+<!-- Queries -->
+<div class="container" id="queries" style="display:none;">
+  <h2>Queries</h2>
+  <p>Have a question? Contact us at <strong>support@pestedu.org</strong></p>
+</div>
+
+<footer>&copy; 2025 PEST - Poor Education System Technology. All Rights Reserved.</footer>
+
+<script>
+  function showSection(section) {
+    const sections = ['home','studentLogin','teacherLogin','about','resources','challenges','queries'];
+    sections.forEach(s => document.getElementById(s).style.display = "none");
+    document.getElementById(section).style.display = "block";
+    document.getElementById('studentDashboard').style.display = "none";
+    document.getElementById('teacherDashboard').style.display = "none";
+  }
+
+  function studentLogin() {
+    const id = document.getElementById('studentId').value;
+    const pass = document.getElementById('studentPass').value;
+    if(id === "1234" && pass === "1234") {
+      document.getElementById('studentLogin').style.display = "none";
+      document.getElementById('studentDashboard').style.display = "block";
+      renderChart();
+    } else { alert("Invalid credentials. Try again."); }
+  }
+
+  function teacherLogin() {
+    const id = document.getElementById('teacherId').value;
+    const pass = document.getElementById('teacherPass').value;
+    if(id === "1111" && pass === "1111") {
+      document.getElementById('teacherLogin').style.display = "none";
+      document.getElementById('teacherDashboard').style.display = "block";
+    } else { alert("Invalid Teacher credentials."); }
+  }
+
+  function submitMarks() {
+    const studentId = document.getElementById('inputStudentId').value;
+    const marks = document.getElementById('inputMarks').value;
+    if(studentId && marks) {
+      let table = document.getElementById("teacherMarksTable");
+      let row = table.insertRow();
+      let cell1 = row.insertCell(0);
+      let cell2 = row.insertCell(1);
+      cell1.innerHTML = studentId;
+      cell2.innerHTML = marks;
+      document.getElementById('inputStudentId').value = "";
+      document.getElementById('inputMarks').value = "";
+    } else { alert("Please enter both Student ID and Marks."); }
+  }
+
+  function renderChart() {
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mid Term 1', 'Mid Term 2', 'Final Exam'],
+        datasets: [{
+          label: 'Marks',
+          data: [68, 75, 82],
+          borderColor: '#ff416c',
+          backgroundColor: 'rgba(255,65,108,0.2)',
+          tension: 0.3,
+          fill: true,
+          pointBackgroundColor: '#ff4b2b',
+          pointBorderColor: '#fff',
+          pointRadius: 6,
+          pointHoverRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, max: 100 } }
+      }
+    });
+  }
+
+  function showResources() {
+    const village = document.getElementById('villageSelect').value;
+    const container = document.getElementById('villageResources');
+    if(village === "") {
+      container.innerHTML = "<p style='color:red;'>Please select a village.</p>";
+      return;
+    }
+    const resources = {
+      "Hassan": ["Mobile classroom available", "Local library access", "Virtual mentoring sessions"],
+      "Channarayapatna": ["Community learning center", "After-school tutoring", "E-books & PDFs"],
+      "Belur": ["Online videos access", "Mentor helpline", "Scholarships for top students"],
+      "Arsikere": ["School buses arranged", "Local computer lab", "Virtual teacher sessions"]
+    };
+    container.innerHTML = "<ul>" + resources[village].map(r => "<li>"+r+"</li>").join('') + "</ul>";
+  }
+
+  function submitQuery() {
+    const query = document.getElementById('studentQuery').value;
+    const responseEl = document.getElementById('queryResponse');
+    if(query.trim() === "") {
+      responseEl.style.color = "red";
+      responseEl.innerText = "Please write a query first!";
+      return;
+    }
+    responseEl.style.color = "green";
+    responseEl.innerText = "Your query has been submitted. A mentor will respond soon!";
+    document.getElementById('studentQuery').value = "";
+  }
+
+  function submitComplaint() {
+    const complaint = document.getElementById('complaintText').value;
+    const responseEl = document.getElementById('complaintResponse');
+    if(complaint.trim() === "") {
+      responseEl.style.color = "red";
+      responseEl.innerText = "Please write your complaint!";
+      return;
+    }
+    responseEl.style.color = "green";
+    responseEl.innerText = "Your complaint has been submitted. We will review it confidentially.";
+    document.getElementById('complaintText').value = "";
+  }
+</script>
+
 </body>
 </html>
